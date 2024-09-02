@@ -6,8 +6,8 @@ from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'username', 'role', 'is_active')
-    ordaring  = ('-date_joined',)
+    list_display = ('email', 'first_name', 'last_name', 'username', 'role', 'created_at', 'is_active')
+    ordering  = ('-created_at',)
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
