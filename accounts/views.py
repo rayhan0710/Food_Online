@@ -4,7 +4,7 @@ from .models import User, UserProfile
 from .forms import UserForm
 from django.contrib import messages, auth
 from vendor.forms import VendorForm
-from .utils import detectUser
+from .utils import detectUser, send_verification_email
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 
@@ -50,6 +50,10 @@ def registerUser(request):
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
             user.role = user.CUSTOMER
             user.save()
+
+            # Send varification email
+            send_verification_email(request, user)
+
             messages.success(request, 'Your account has been registered sucessfully!')
             return redirect('registerUser')
         else:
@@ -86,6 +90,10 @@ def registerVendor(request):
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
+
+            # Send varification email
+            send_verification_email(request, user)
+
             messages.success(request, 'Your account has been registered sucessfully! Wait for the approval')
             return redirect('registerVendor')
         else:
@@ -105,9 +113,14 @@ def registerVendor(request):
     return render(request, 'accounts/registerVendor.html', context)
 
 
+def activate(reequest, uidb64, token):
+    # Activate the user by setting the is_active status to True
+    return
+
+
 def login(request):
     if request.user.is_authenticated:
-        messages.warning(request, 'You already logged in!')
+        messages.warning(request, 'You already logged in! ')
         return redirect('myAccount')
     elif request.method == 'POST':
         email = request.POST['email']
@@ -116,10 +129,10 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            messages.success(request, 'You are logged in')
+            messages.success(request, 'You are logged in. ')
             return redirect('myAccount')
         else:
-            messages.error(request, 'Invalid login credentials')
+            messages.error(request, 'Invalid login credentials! Please try again. ')            
             return redirect('login')
         
     return render(request, 'accounts/login.html')
@@ -127,7 +140,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    messages.info(request, 'You are logged out.')
+    messages.info(request, 'You are logged out. ')
     return redirect('login')
 
 @login_required(login_url='login')
