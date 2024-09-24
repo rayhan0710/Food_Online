@@ -40,11 +40,12 @@
 																	</ul>
 																</div>
 																<div class="text-holder">
-																	<label>Update Logo</label>
+																	<label>Update Profile Picture</label>
 																	<div class="upload-gallery">
 																		{{profile_form.profile_picture}}
 																	</div>
 																</div>
+                                                                <label class="text-danger">{{ profile_form.profile_picture.errors }}</label>
 															</div>
 														</div>
 														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -57,6 +58,17 @@
 																					<img class="thumbnail" src="{{profile.cover_photo.url}}" alt="Cover Photo">
 																				</div>
 																			</div>
+
+																			<div class="drag-list">
+																				<div class="item-thumb">
+																					<img class="thumbnail" src="{{profile.cover_photo.url}}" alt="Cover Photo">
+																				</div>
+																			</div>
+
+
+
+
+
 																		</li>
 																	</ul>
 																</div>
@@ -67,6 +79,7 @@
 																	</div>
 																	
 																</div>
+                                                                <label class="text-denger">{{ profile_form.cover_photo.errors }}</label>
 															</div>
 														</div>
 														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -89,6 +102,13 @@
 																	</div>
 																	
 																</div>
+																{% if vendor_form.vendor_license.errors %}
+																
+																	{% for error in vendor_form.vendor_license.errors %}
+																		{{ error }}  
+																	{% endfor %}
+																{% endif %}
+																
 															</div>
 														</div>
 														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
