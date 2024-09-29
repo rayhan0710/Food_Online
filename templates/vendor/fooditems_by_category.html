@@ -18,8 +18,9 @@
                     <div class="user-dashboard loader-holder">
                         <div class="user-holder">
 
-                            <h3 class="text-uppercase text-center pb-5">Build your food menu</h3>
+                            <h3 class="text-uppercase text-center">Build your food menu</h3>
                             <br> 
+                            <h4 class="text-secondary text-center pb-5">List of Food Item</h4>
                             <button class="btn btn-secondary" onclick="history.back()"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back </button>
                             <br> <br>
                             <h6>Category: <span class="text-uppercase text-success"> {{category}} </span></h6>
@@ -37,7 +38,24 @@
                                         <a href="#"><p class="mb-0 font-weight-bold">{{food}}</p>
                                         <small class="text-muted"> {{food.description}} </small></a>
                                     </td>
-                                    <td><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; &nbsp; <i class="fa fa-trash text-danger display-5" aria-hidden="true"></i> </td>
+
+                                    <td>
+                                        
+                                        {% if food.is_available %}
+                                            <span class="badge badge-success">Available</span>
+
+                                            {% else %}
+                                            <span class="badge badge-danger">Not Available</span>
+                                            
+                                        {% endif %}
+                                            
+                                    </td>
+
+
+                                    <td>
+                                        <a href="{% url 'edit_food' food.id %}" style="color: unset;"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> &nbsp; &nbsp; 
+                                        <a href="{% url 'delete_food' food.id %}" onclick="return confirm('Are you sure delete this Food Item? ')"> <i class="fa fa-trash text-danger display-5" aria-hidden="true"></i> </a> 
+                                    </td>
                                     
                                   </tr>   
                                     {% endfor %}                       
@@ -46,9 +64,9 @@
                               </table>
 
                               {% else %}
-                              <h5 class="text-center">No food items found!</h5>
+                              <h5 class="text-center text-danger">No food items found!</h5>
                               <div class="text-center">
-                                <a href="#" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add new item</a>
+                                <a href="{% url 'add_food' %}" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add new item</a>
                               </div>
                               
 

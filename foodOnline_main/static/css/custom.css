@@ -13,3 +13,9 @@
     animation-duration: 7s;
     z-index: 99;
 }
+
+.btn{
+    height: 30px !important;    
+    font-size: 13px;
+    padding: 3px 20px;
+}
