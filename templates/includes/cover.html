@@ -13,9 +13,9 @@
                             <figure>
                                 
                                 {% if vendor.user_profile.profile_picture %}
-                                <img src="{{ vendor.user_profile.profile_picture.url }}" alt="Profile Pic">
+                                <img src="{{ vendor.user_profile.profile_picture.url }}" alt="Profile Pic" style="height: 90px;" >
                                 {% else %}
-                                <img src="{% static 'images/default-profile.PNG' %}" alt="Profile Pic">
+                                <img src="{% static 'images/default-profile.PNG' %}" alt="Profile Pic" style="height: 90px;">
                                     
                                 {% endif %}                                   
                                 
