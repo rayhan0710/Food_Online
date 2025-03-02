@@ -67,7 +67,7 @@ def add_to_cart(request, food_id):
             return JsonResponse({'status': 'Failed', 'message': 'Invalid request' })
 
     else:
-        return JsonResponse({'status': 'Failed', 'message': 'Please login to countinue' })
+        return JsonResponse({'status': 'login_required', 'message': 'Please login to countinue' })
     
 
 
@@ -97,4 +97,4 @@ def decrease_cart(request, food_id):
             return JsonResponse({'status': 'Failed', 'message': 'Invalid request' })
 
     else:
-        return JsonResponse({'status': 'Failed', 'message': 'Please login to countinue' })
+        return JsonResponse({'status': 'login_required', 'message': 'Please login to countinue' })
