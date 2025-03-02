@@ -88,7 +88,7 @@ def decrease_cart(request, food_id):
                     else:
                         chkCart.delete()
                         chkCart.quantity = 0 
-                    return JsonResponse({'status': 'Success', 'message': 'Incerased the cart quantity', 'cart_counter': get_cart_counter(request), 'qty': chkCart.quantity })
+                    return JsonResponse({'status': 'Success', 'cart_counter': get_cart_counter(request), 'qty': chkCart.quantity })
                 except:
                     return JsonResponse({'status': 'Failed', 'message': 'You do not have this item in your cart!' })
             except:
